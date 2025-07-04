@@ -9,56 +9,6 @@ const hacks = [
   { base: 'compren', ext: '.de' }
 ];
 
-<<<<<<< HEAD
-// Función auxiliar
-const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-
-// Generador según tipo
-function generate(type, keyword = '') {
-  if (type === 'hack') {
-    const h = pick(hacks);
-    return h.base + h.ext;
-  }
-  if (!keyword) keyword = pick(adj) + pick(noun);
-  const prefixMap = {
-    divertido:   'lol',
-    profesional: 'biz',
-    mágico:      'glow'
-  };
-  const ext = pick(extensions);
-  return (prefixMap[type] || '') + keyword + ext;
-}
-
-// DOM
-const sugBtns = document.querySelectorAll('.suggestions button');
-const input   = document.getElementById('userInput');
-const result  = document.getElementById('domainResult');
-const sendBtn = document.getElementById('sendBtn');
-const clearBtn= document.getElementById('clear');
-
-// Sugerencias
-sugBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const type = btn.dataset.type;
-    result.textContent = `✨ Patsy sugiere: ${generate(type)}`;
-  });
-});
-
-// Enviar palabra clave
-sendBtn.addEventListener('click', () => {
-  const word = input.value.trim().toLowerCase();
-  if (!word) {
-    result.textContent = '⚠️ Escribe tu palabra clave primero.';
-    return;
-  }
-  result.textContent = `🌟 Tu dominio custom: ${generate('custom', word)}`;
-});
-
-// Limpiar
-clearBtn.addEventListener('click', () => {
-  input.value = '';
-  result.textContent = '';
-=======
 // 🎀 Frases centennial
 const phrases = [
   '🚀 Este está listo para despegar.',
@@ -174,5 +124,4 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('📭 Nada que descargar');
     }
   });
->>>>>>> 8e93c5a (🦄 Proyecto listo: README + estilos + funciones completas)
 });

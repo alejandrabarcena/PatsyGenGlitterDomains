@@ -1,0 +1,120 @@
+:root {
+  --lavender:  #E0BBE4;
+  --pink:      #FFB7CE;
+  --mint:      #B5EAD7;
+  --cream:     #FFF1E8;
+  --shadow:    rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Baloo 2', cursive;
+  background: linear-gradient(135deg, var(--lavender), var(--cream));
+  color: #4A3F51;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.chat-wrapper {
+  width: 100%;
+  max-width: 440px;
+  background: var(--cream);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px var(--shadow);
+  overflow: hidden;
+}
+
+.bot-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.avatar {
+  width: 52px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--pink);
+}
+
+.chat-body {
+  padding: 0 1rem 1rem;
+}
+
+.bot-bubble {
+  background: var(--pink);
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  box-shadow: 0 2px 8px var(--shadow);
+  color: #4A3F51;
+}
+
+.result {
+  background: var(--mint);
+  border-left: 4px solid var(--pink);
+  color: #045D56;
+  font-weight: 700;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 1rem 0.75rem;
+}
+
+.suggestions button {
+  flex: 1 1 calc(50% - 0.5rem);
+  padding: 0.6rem;
+  background: var(--mint);
+  border: none;
+  border-radius: 12px;
+  color: #045D56;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: background 0.2s;
+}
+
+.suggestions button:hover {
+  background: var(--pink);
+  color: #4A3F51;
+}
+
+#userInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--lavender);
+  border-radius: 12px;
+  background: #fff;
+  margin: 0.5rem 0;
+}
+
+.input-area {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-area button {
+  flex: 1;
+  padding: 0.6rem;
+  background: var(--lavender);
+  border: none;
+  border-radius: 12px;
+  color: #4A3F51;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: transform 0.2s;
+}
+
+.input-area button:hover {
+  transform: translateY(-2px);
+}

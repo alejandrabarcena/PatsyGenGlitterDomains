@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatsyGenGlitterDomains 💖</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="chat-wrapper">
+    <div class="bot-header">
+      <img src="images/patsy.png" alt="Avatar de Patsy" class="avatar"/>
+      <div class="bot-bubble">👋 ¡Hola! Soy <strong>Patsy</strong>, ¿qué dominio fabuloso necesitas?</div>
+    </div>
+
+    <div class="suggestions">
+      <button data-type="divertido">🎉 Divertido</button>
+      <button data-type="profesional">💼 Profesional</button>
+      <button data-type="mágico">🪄 Mágico</button>
+      <button data-type="hack">💥 Domain Hack</button>
+    </div>
+
+    <div class="chat-body">
+      <div class="bot-bubble" id="questionBubble">
+        Escribe tu palabra clave o elige una sugerencia arriba ✍️
+      </div>
+      <input
+        id="userInput"
+        type="text"
+        placeholder="ej. sparkle, viajero, idea..."
+      />
+      <div class="input-area">
+        <button id="sendBtn"><i class="fas fa-paper-plane"></i> Enviar</button>
+        <button id="clear"><i class="fas fa-trash-alt"></i> Borrar</button>
+      </div>
+      <div class="bot-bubble result" id="domainResult"></div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+    integrity="sha512-pIVMxRbCzJvOwI+2u4zjpvZiFdzIu/jFdF06E1Z1tRGWshMb2MxPI/daQS7/0B2fq9H80FYvB1d4CJW3THR6KA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="app.js"></script>
+</body>
+</html>

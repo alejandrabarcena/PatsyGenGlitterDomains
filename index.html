@@ -6,20 +6,19 @@
   <title>PatsyGenGlitterDomains 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+    integrity="sha512-pIVMxRbCzJvOwI+2u4zjpvZiFdzIu/jFdF06E1Z1tRGWshMb2MxPI/daQS7/0B2fq9H80FYvB1d4CJW3THR6KA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
 </head>
 <body>
-  <!-- 💖 Patsy fuera del cuadro -->
-  <header class="logo-header">
-    <img src="https://i.postimg.cc/DZPSBPN4/patsy-png.png" alt="Logo de Patsy" class="main-logo" />
-  </header>
-
-  <!-- 💬 Interfaz de dominio -->
-  <main class="chat-wrapper" role="main">
-    <section class="bot-header">
-      <div class="bot-bubble">
-        👋 ¡Hola! Soy <strong>Patsy</strong>, ¿qué dominio fabuloso necesitas?
-      </div>
-    </section>
+  <div class="chat-wrapper">
+    <div class="bot-header">
+      <img src="images/patsy.png" alt="Avatar de Patsy" class="avatar"/>
+      <div class="bot-bubble">👋 ¡Hola! Soy <strong>Patsy</strong>, ¿qué dominio fabuloso necesitas?</div>
+    </div>
 
     <section class="suggestions" aria-label="Tipo de dominio">
       <button data-type="divertido">🎉 Divertido</button>
@@ -36,17 +35,20 @@
       <input id="userInput" type="text" placeholder="ej. sparkle, viajero, idea..." aria-label="Palabra clave" />
 
       <div class="input-area">
-        <button id="sendBtn">🚀 Enviar</button>
-        <button id="clearBtn">🧼 Borrar</button>
-        <button id="copyBtn">📋 Copiar</button>
-        <button id="downloadBtn">📁 Descargar</button>
+        <button id="sendBtn"><i class="fas fa-paper-plane"></i> Enviar</button>
+        <button id="clear"><i class="fas fa-trash-alt"></i> Borrar</button>
       </div>
 
       <div class="bot-bubble result" id="domainResult"></div>
     </section>
   </main>
 
-  <!-- 🧠 JavaScript -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+    integrity="sha512-pIVMxRbCzJvOwI+2u4zjpvZiFdzIu/jFdF06E1Z1tRGWshMb2MxPI/daQS7/0B2fq9H80FYvB1d4CJW3THR6KA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,7 +1,3 @@
-// 🌈 Diccionario base
-const pronouns = ['the', 'our'];
-const adjectives = ['great', 'big'];
-const nouns = ['jogger', 'racoon'];
 const extensions = ['.com', '.io', '.es'];
 const hacks = [
   { base: 'pued', ext: '.es' },
@@ -9,7 +5,6 @@ const hacks = [
   { base: 'compren', ext: '.de' }
 ];
 
-// 🎀 Frases centennial
 const phrases = [
   '🚀 Este está listo para despegar.',
   '💎 Este dominio brilla más que un NFT en 2021.',
@@ -21,81 +16,70 @@ const phrases = [
   '📣 Este se siente viral ya.'
 ];
 
-// 🎁 Función para generar dominios personalizados
-function generateDomainsWithKeyword(keyword) {
-  const domains = [];
-  const prefix = ['glow', 'lol', 'biz', 'super', 'go'];
-  const suffix = ['magic', 'land', 'hub', 'world', 'gen'];
+function generate(type, keyword = '') {
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
-  for (let i = 0; i < 10; i++) {
-    const pre = prefix[Math.floor(Math.random() * prefix.length)];
-    const suf = suffix[Math.floor(Math.random() * suffix.length)];
-    const ext = extensions[Math.floor(Math.random() * extensions.length)];
-    domains.push(`${pre}${keyword}${suf}${ext}`);
+  if (type === 'hack') {
+    const hack = pick(hacks);
+    return `${hack.base}${hack.ext}`;
   }
 
-  return domains;
+  if (!keyword.trim()) keyword = 'glitterpup';
+  const prefixMap = {
+    divertido: 'lol',
+    profesional: 'biz',
+    mágico: 'glow'
+  };
+  const prefix = prefixMap[type] || '';
+  const ext = pick(extensions);
+  return `${prefix}${keyword}${ext}`;
 }
 
-// 🚀 Inicia cuando carga el DOM
 document.addEventListener('DOMContentLoaded', () => {
-  const suggestionButtons = document.querySelectorAll('.suggestions button');
-  const inputField = document.getElementById('userInput');
-  const resultBubble = document.getElementById('domainResult');
-  const sendButton = document.getElementById('sendBtn');
-  const clearButton = document.getElementById('clearBtn');
-  const copyButton = document.getElementById('copyBtn');
-  const downloadButton = document.getElementById('downloadBtn');
+  const buttons = document.querySelectorAll('.suggestions button');
+  const input = document.getElementById('userInput');
+  const output = document.getElementById('domainResult');
+  const send = document.getElementById('sendBtn');
+  const clear = document.getElementById('clearBtn');
+  const copy = document.getElementById('copyBtn');
+  const download = document.getElementById('downloadBtn');
 
-  // 🎉 Click en sugerencias
-  suggestionButtons.forEach(btn => {
+  buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       const type = btn.dataset.type;
-      const keyword = inputField.value.trim().toLowerCase() || 'glitter';
-      const results = generateDomainsWithKeyword(keyword);
-      const combined = results.map((domain, i) => {
-        const comment = `<span class="comment">${phrases[i % phrases.length]}</span>`;
-        return `✨ ${domain}${comment}`;
-      });
-      resultBubble.innerHTML = combined.join('<br>');
-      resultBubble.dataset.plaintext = results.join('\n');
+      const keyword = input.value.trim() || 'patsy';
+      const domain = generate(type, keyword);
+      output.innerHTML = `✨ Patsy sugiere: ${domain}`;
+      output.dataset.plaintext = domain;
     });
   });
 
-  // 🚀 Botón enviar
-  sendButton.addEventListener('click', () => {
-    const keyword = inputField.value.trim().toLowerCase() || 'sparkle';
-    const results = generateDomainsWithKeyword(keyword);
+  send.addEventListener('click', () => {
+    const keyword = input.value.trim() || 'patsy';
+    const results = extensions.map(ext => `${keyword}${ext}`);
     const combined = results.map((domain, i) => {
-      const comment = `<span class="comment">${phrases[i % phrases.length]}</span>`;
-      return `✨ ${domain}${comment}`;
+      const phrase = phrases[i % phrases.length];
+      return `✨ ${domain}<span class="comment">${phrase}</span>`;
     });
-    resultBubble.innerHTML = combined.join('<br>');
-    resultBubble.dataset.plaintext = results.join('\n');
+    output.innerHTML = combined.join('<br>');
+    output.dataset.plaintext = results.join('\n');
   });
 
-  // 🧼 Limpiar
-  clearButton.addEventListener('click', () => {
-    inputField.value = '';
-    resultBubble.innerHTML = '';
-    resultBubble.dataset.plaintext = '';
+  clear.addEventListener('click', () => {
+    input.value = '';
+    output.innerHTML = '';
+    output.dataset.plaintext = '';
   });
 
-  // 📋 Copiar
-  copyButton.addEventListener('click', () => {
-    const text = resultBubble.dataset.plaintext || '';
-    if (text) {
-      navigator.clipboard.writeText(text)
-        .then(() => alert('✨ Dominios copiados al portapapeles'))
-        .catch(() => alert('⚠️ Error al copiar'));
-    } else {
-      alert('🤷‍♀️ No hay dominios para copiar');
-    }
+  copy.addEventListener('click', () => {
+    const text = output.dataset.plaintext || '';
+    navigator.clipboard.writeText(text)
+      .then(() => alert('✨ Copiado'))
+      .catch(() => alert('⚠️ Error al copiar'));
   });
 
-  // 📁 Descargar
-  downloadButton.addEventListener('click', () => {
-    const text = resultBubble.dataset.plaintext || '';
+  download.addEventListener('click', () => {
+    const text = output.dataset.plaintext || '';
     if (text) {
       const blob = new Blob([text], { type: 'text/plain' });
       const link = document.createElement('a');

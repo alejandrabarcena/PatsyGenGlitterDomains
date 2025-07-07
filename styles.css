@@ -1,117 +1,82 @@
-:root {
-  --lavender: #E0BBE4;
-  --pink: #FFB7CE;
-  --mint: #B5EAD7;
-  --cream: #FFF1E8;
-  --shadow: rgba(0, 0, 0, 0.1);
-}
+const pronouns   = ['the', 'our'];
+const adjectives = ['great', 'big', 'super', 'biz', 'magic'];
+const nouns      = ['jogger', 'racoon', 'world', 'hub', 'osomagic'];
+const extensions = ['.com', '.io', '.es'];
 
-body {
-  font-family: 'Baloo 2', cursive;
-  background: linear-gradient(135deg, var(--lavender), var(--cream));
-  color: #4A3F51;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-}
+const phrases = [
+  '🚀 Este está listo para despegar.',
+  '💎 Este dominio brilla más que un NFT en 2021.',
+  '🔥 ¡Boom! Startup vibes totales.',
+  '🌈 Ideal para tu imperio digital arcoíris.',
+  '🧠 Nivel CEO desbloqueado.',
+  '🐾 Patsy dice: lo veo en un cartel en Times Square.',
+  '✨ ¡Marca legendaria detectada!',
+  '📣 Este se siente viral ya.'
+];
 
-.logo-header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
+function generateAllCombinations(keyword = '') {
+  const results = [];
+  const useKeyword = keyword ? [keyword.toLowerCase()] : nouns;
 
-.main-logo {
-  max-width: 320px;
-  width: 90%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px var(--shadow);
-}
-
-.chat-wrapper {
-  width: 100%;
-  max-width: 480px;
-  background: var(--cream);
-  border-radius: 20px;
-  box-shadow: 0 4px 12px var(--shadow);
-  padding: 1rem;
-}
-
-.bot-header,
-.chat-body {
-  margin-bottom: 1rem;
-}
-
-.bot-bubble {
-  background: var(--pink);
-  border-radius: 16px;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0;
-  box-shadow: 0 2px 8px var(--shadow);
-}
-
-.result {
-  background: var(--mint);
-  border-left: 4px solid var(--pink);
-  font-weight: bold;
-  color: #045D56;
-  margin-top: 0.5rem;
-  white-space: pre-line;
-}
-
-.comment {
-  display: block;
-  font-size: 0.9em;
-  color: #7a5a83;
-  margin-left: 1rem;
-}
-
-.suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.suggestions button,
-.input-area button {
-  flex: 1 1 calc(50% - 0.5rem);
-  padding: 0.6rem;
-  background: var(--mint);
-  border: none;
-  border-radius: 12px;
-  color: #045D56;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px var(--shadow);
-}
-
-.suggestions button:hover,
-.input-area button:hover {
-  background: var(--pink);
-  color: #4A3F51;
-  transform: translateY(-2px);
-}
-
-#userInput {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid var(--lavender);
-  border-radius: 12px;
-  margin: 0.5rem 0;
-  background: white;
-}
-
-#userInput:focus {
-  outline: none;
-  border-color: var(--pink);
-}
-
-@media (max-width: 480px) {
-  .suggestions button,
-  .input-area button {
-    flex: 1 1 100%;
+  for (const adj of adjectives) {
+    for (const noun of useKeyword) {
+      for (const ext of extensions) {
+        results.push(`${adj}${noun}${ext}`);
+      }
+    }
   }
+  return results;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const inputField        = document.getElementById('userInput');
+  const resultBubble      = document.getElementById('domainResult');
+  const sendButton        = document.getElementById('sendBtn');
+  const clearButton       = document.getElementById('clearBtn');
+  const copyButton        = document.getElementById('copyBtn');
+  const downloadButton    = document.getElementById('downloadBtn');
+
+  sendButton.addEventListener('click', () => {
+    const keyword = inputField.value.trim();
+    const domains = generateAllCombinations(keyword);
+
+    const combined = domains.map((domain, i) => {
+      const emojiLine = `✨ ${domain}`;
+      const comment = `<span class="comment">${phrases[i % phrases.length]}</span>`;
+      return `${emojiLine}${comment}`;
+    });
+
+    resultBubble.innerHTML = combined.join('<br>');
+    resultBubble.dataset.plaintext = domains.join('\n');
+  });
+
+  clearButton.addEventListener('click', () => {
+    inputField.value = '';
+    resultBubble.innerHTML = '';
+    resultBubble.dataset.plaintext = '';
+  });
+
+  copyButton.addEventListener('click', () => {
+    const text = resultBubble.dataset.plaintext || '';
+    if (text) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert('✨ Dominios copiados al portapapeles'))
+        .catch(() => alert('⚠️ Error al copiar'));
+    } else {
+      alert('🤷‍♀️ No hay dominios para copiar');
+    }
+  });
+
+  downloadButton.addEventListener('click', () => {
+    const text = resultBubble.dataset.plaintext || '';
+    if (text) {
+      const blob = new Blob([text], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.download = 'patsy-domains.txt';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    } else {
+      alert('📭 Nada que descargar');
+    }
+  });
+});

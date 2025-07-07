@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PatsyGenGlitterDomains 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="logo-header">
+    <img src="https://i.postimg.cc/DZPSBPN4/patsy-png.png" alt="Logo de Patsy" class="main-logo" />
+  </header>
+  <main class="chat-wrapper" role="main">
+    <section class="bot-header">
+      <div class="bot-bubble">
+        👋 ¡Hola! Soy <strong>Patsy</strong>, ¿qué dominio fabuloso necesitas?
+      </div>
+    </section>
+    <section class="suggestions" aria-label="Tipo de dominio">
+      <button data-type="divertido">🎉 Divertido</button>
+      <button data-type="profesional">💼 Profesional</button>
+      <button data-type="mágico">🪄 Mágico</button>
+      <button data-type="hack">💥 Domain Hack</button>
+    </section>
+    <section class="chat-body">
+      <div class="bot-bubble" id="questionBubble">
+        Escribe tu palabra clave o da click en <strong>Enviar</strong> para ver combinaciones mágicas ✨
+      </div>
+      <input id="userInput" type="text" placeholder="ej. sparkle, viajero, idea..." aria-label="Palabra clave" />
+      <div class="input-area">
+        <button id="sendBtn">🚀 Enviar</button>
+        <button id="clearBtn">🧼 Borrar</button>
+        <button id="copyBtn">📋 Copiar</button>
+        <button id="downloadBtn">📁 Descargar</button>
+      </div>
+      <div class="bot-bubble result" id="domainResult"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -8,37 +8,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="chat-wrapper">
-    <div class="bot-header">
-      <img src="assets/pat.png" alt="Avatar de Patsy" class="avatar"/>
+  <header class="logo-header">
+    <img src="https://i.postimg.cc/DZPSBPN4/patsy-png.png" alt="Logo de Patsy" class="main-logo" />
+  </header>
+  <main class="chat-wrapper" role="main">
+    <section class="bot-header">
       <div class="bot-bubble">
         👋 ¡Hola! Soy <strong>Patsy</strong>, ¿qué dominio fabuloso necesitas?
       </div>
-    </div>
-
+    </section>
     <section class="suggestions" aria-label="Tipo de dominio">
       <button data-type="divertido">🎉 Divertido</button>
       <button data-type="profesional">💼 Profesional</button>
       <button data-type="mágico">🪄 Mágico</button>
       <button data-type="hack">💥 Domain Hack</button>
     </section>
-
     <section class="chat-body">
       <div class="bot-bubble" id="questionBubble">
         Escribe tu palabra clave o da click en <strong>Enviar</strong> para ver combinaciones mágicas ✨
       </div>
-      
       <input id="userInput" type="text" placeholder="ej. sparkle, viajero, idea..." aria-label="Palabra clave" />
-
       <div class="input-area">
-        <button id="sendBtn"><i class="fas fa-paper-plane"></i> Enviar</button>
-        <button id="clearBtn"><i class="fas fa-trash-alt"></i> Borrar</button>
+        <button id="sendBtn">🚀 Enviar</button>
+        <button id="clearBtn">🧼 Borrar</button>
+        <button id="copyBtn">📋 Copiar</button>
+        <button id="downloadBtn">📁 Descargar</button>
       </div>
-
       <div class="bot-bubble result" id="domainResult"></div>
     </section>
   </main>
-
   <script src="app.js"></script>
 </body>
 </html>

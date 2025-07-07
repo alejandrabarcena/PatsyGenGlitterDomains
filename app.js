@@ -1,7 +1,7 @@
 // 🌈 Diccionario base
-const pronouns   = ['the', 'our'];
+const pronouns = ['the', 'our'];
 const adjectives = ['great', 'big'];
-const nouns      = ['jogger', 'racoon'];
+const nouns = ['jogger', 'racoon'];
 const extensions = ['.com', '.io', '.es'];
 const hacks = [
   { base: 'pued', ext: '.es' },
@@ -21,75 +21,57 @@ const phrases = [
   '📣 Este se siente viral ya.'
 ];
 
-// 🛠️ Todas las combinaciones posibles
-function generateAllCombinations() {
-  const results = [];
-  for (const pronoun of pronouns) {
-    for (const adjective of adjectives) {
-      for (const noun of nouns) {
-        for (const ext of extensions) {
-          results.push(`${pronoun}${adjective}${noun}${ext}`);
-        }
-      }
-    }
-  }
-  return results;
-}
+// 🎁 Función para generar dominios personalizados
+function generateDomainsWithKeyword(keyword) {
+  const domains = [];
+  const prefix = ['glow', 'lol', 'biz', 'super', 'go'];
+  const suffix = ['magic', 'land', 'hub', 'world', 'gen'];
 
-// ⚡ Sugerencias rápidas por tipo
-function generate(type, keyword = '') {
-  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-
-  if (type === 'hack') {
-    const hack = pick(hacks);
-    return `${hack.base}${hack.ext}`;
+  for (let i = 0; i < 10; i++) {
+    const pre = prefix[Math.floor(Math.random() * prefix.length)];
+    const suf = suffix[Math.floor(Math.random() * suffix.length)];
+    const ext = extensions[Math.floor(Math.random() * extensions.length)];
+    domains.push(`${pre}${keyword}${suf}${ext}`);
   }
 
-  if (!keyword) keyword = `${pick(adjectives)}${pick(nouns)}`;
-
-  const prefixMap = {
-    divertido: 'lol',
-    profesional: 'biz',
-    mágico: 'glow'
-  };
-
-  const prefix = prefixMap[type] || '';
-  const ext = pick(extensions);
-  return `${prefix}${keyword}${ext}`;
+  return domains;
 }
 
 // 🚀 Inicia cuando carga el DOM
 document.addEventListener('DOMContentLoaded', () => {
   const suggestionButtons = document.querySelectorAll('.suggestions button');
-  const inputField        = document.getElementById('userInput');
-  const resultBubble      = document.getElementById('domainResult');
-  const sendButton        = document.getElementById('sendBtn');
-  const clearButton       = document.getElementById('clearBtn');
-  const copyButton        = document.getElementById('copyBtn');
-  const downloadButton    = document.getElementById('downloadBtn');
+  const inputField = document.getElementById('userInput');
+  const resultBubble = document.getElementById('domainResult');
+  const sendButton = document.getElementById('sendBtn');
+  const clearButton = document.getElementById('clearBtn');
+  const copyButton = document.getElementById('copyBtn');
+  const downloadButton = document.getElementById('downloadBtn');
 
   // 🎉 Click en sugerencias
   suggestionButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const type = btn.dataset.type;
-      const result = generate(type);
-      resultBubble.innerHTML = `✨ Patsy sugiere: ${result}`;
-      resultBubble.dataset.plaintext = result;
+      const keyword = inputField.value.trim().toLowerCase() || 'glitter';
+      const results = generateDomainsWithKeyword(keyword);
+      const combined = results.map((domain, i) => {
+        const comment = `<span class="comment">${phrases[i % phrases.length]}</span>`;
+        return `✨ ${domain}${comment}`;
+      });
+      resultBubble.innerHTML = combined.join('<br>');
+      resultBubble.dataset.plaintext = results.join('\n');
     });
   });
 
-  // 🚀 Mostrar todas las combinaciones
+  // 🚀 Botón enviar
   sendButton.addEventListener('click', () => {
-    const domains = generateAllCombinations();
-
-    const combined = domains.map((domain, i) => {
-      const emojiLine = `✨ ${domain}`;
+    const keyword = inputField.value.trim().toLowerCase() || 'sparkle';
+    const results = generateDomainsWithKeyword(keyword);
+    const combined = results.map((domain, i) => {
       const comment = `<span class="comment">${phrases[i % phrases.length]}</span>`;
-      return `${emojiLine}${comment}`;
+      return `✨ ${domain}${comment}`;
     });
-
     resultBubble.innerHTML = combined.join('<br>');
-    resultBubble.dataset.plaintext = domains.join('\n');
+    resultBubble.dataset.plaintext = results.join('\n');
   });
 
   // 🧼 Limpiar
@@ -99,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resultBubble.dataset.plaintext = '';
   });
 
-  // 📋 Copiar al portapapeles
+  // 📋 Copiar
   copyButton.addEventListener('click', () => {
     const text = resultBubble.dataset.plaintext || '';
     if (text) {
@@ -111,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 📁 Descargar archivo .txt
+  // 📁 Descargar
   downloadButton.addEventListener('click', () => {
     const text = resultBubble.dataset.plaintext || '';
     if (text) {

@@ -30,7 +30,6 @@ body {
   box-shadow: 0 4px 12px var(--shadow);
 }
 
-/* 🧁 Chat Bubble UI */
 .chat-wrapper {
   width: 100%;
   max-width: 480px;
@@ -62,7 +61,6 @@ body {
   white-space: pre-line;
 }
 
-/* ✨ Comentarios debajo de cada dominio */
 .comment {
   display: block;
   font-size: 0.9em;
@@ -70,7 +68,6 @@ body {
   margin-left: 1rem;
 }
 
-/* 💡 Botones de sugerencia */
 .suggestions {
   display: flex;
   flex-wrap: wrap;
@@ -98,7 +95,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* 🧠 Input */
 #userInput {
   width: 100%;
   padding: 0.75rem;
@@ -113,7 +109,6 @@ body {
   border-color: var(--pink);
 }
 
-/* 📱 Responsive tweak */
 @media (max-width: 480px) {
   .suggestions button,
   .input-area button {
